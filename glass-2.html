@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TonyShop — Glass Arctic</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#020b18;--b1:#0ea5e9;--b2:#38bdf8;--b3:#7dd3fc;--mint:#34d399;--wh:#f0f9ff;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--wh);overflow-x:hidden;}
+#sp{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--b1),var(--mint));z-index:9999;width:0%;}
+.bg-wrap{position:fixed;inset:0;z-index:0;}
+.bg-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 0% 0%,rgba(14,165,233,.15),transparent 60%),radial-gradient(ellipse 60% 50% at 100% 100%,rgba(52,211,153,.12),transparent 55%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(56,189,248,.06),transparent 50%),#020b18;}
+/* Animated aurora */
+.aurora{position:absolute;inset:0;overflow:hidden;}
+.aurora-band{position:absolute;left:-20%;width:140%;height:40%;border-radius:50%;filter:blur(60px);opacity:.08;}
+.ab1{background:linear-gradient(90deg,var(--b1),var(--mint),var(--b2));top:10%;animation:drift 12s ease-in-out infinite;}
+.ab2{background:linear-gradient(90deg,var(--mint),var(--b3),var(--b1));top:25%;animation:drift 16s ease-in-out infinite reverse;animation-delay:-5s;}
+@keyframes drift{0%,100%{transform:translateX(-10%) scaleY(1);}50%{transform:translateX(10%) scaleY(1.3);}}
+
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;width:min(1100px,calc(100%-28px));display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(2,11,24,.5);backdrop-filter:blur(30px);border:1px solid rgba(14,165,233,.15);border-radius:16px;}
+.logo{font-weight:800;font-size:1.2rem;text-decoration:none;background:linear-gradient(135deg,var(--b2),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-cta{font-size:.78rem;font-weight:700;padding:9px 20px;border-radius:10px;background:linear-gradient(135deg,var(--b1),var(--mint));color:var(--bg);text-decoration:none;box-shadow:0 4px 16px rgba(14,165,233,.3);transition:all .2s;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(14,165,233,.5);}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 5vw;gap:60px;position:relative;z-index:1;}
+.hero-left{animation:slideR .9s ease both;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);border-radius:50px;font-size:.7rem;font-weight:600;color:var(--b2);margin-bottom:28px;}
+.hb-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);}
+h1{font-size:clamp(3rem,6vw,6.5rem);font-weight:800;line-height:.92;letter-spacing:-3px;margin-bottom:24px;}
+h1 .w{color:var(--wh);}h1 .b{background:linear-gradient(135deg,var(--b1),var(--b2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}h1 .m{background:linear-gradient(135deg,var(--mint),var(--b2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-desc{font-size:.95rem;font-weight:300;color:rgba(240,249,255,.5);line-height:1.9;max-width:400px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-a{font-size:.82rem;font-weight:700;padding:13px 28px;border-radius:12px;text-decoration:none;transition:all .2s;}
+.btn-a1{background:linear-gradient(135deg,var(--b1),var(--mint));color:var(--bg);box-shadow:0 4px 20px rgba(14,165,233,.3);}
+.btn-a1:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(14,165,233,.5);}
+.btn-a2{border:1px solid rgba(14,165,233,.2);color:var(--b2);background:rgba(14,165,233,.05);backdrop-filter:blur(8px);}
+.btn-a2:hover{border-color:var(--b2);background:rgba(14,165,233,.1);}
+
+.hero-right{animation:slideL .9s ease both;}
+.hero-card{background:rgba(240,249,255,.04);border:1px solid rgba(14,165,233,.12);border-radius:28px;padding:36px;backdrop-filter:blur(20px);}
+.hc-title{font-size:.65rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(14,165,233,.5);margin-bottom:24px;}
+.hc-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+.hcs{background:rgba(14,165,233,.06);border:1px solid rgba(14,165,233,.1);border-radius:16px;padding:18px;text-align:center;}
+.hcs-val{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--b2),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hcs-lab{font-size:.62rem;color:rgba(240,249,255,.35);letter-spacing:1px;margin-top:4px;}
+.hc-divider{height:1px;background:rgba(14,165,233,.08);margin:20px 0;}
+.hc-feature{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:.82rem;color:rgba(240,249,255,.6);}
+.hc-check{width:22px;height:22px;border-radius:8px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.2);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--mint);flex-shrink:0;}
+
+section{padding:90px 5vw;position:relative;z-index:1;}
+.si{max-width:1100px;margin:0 auto;}
+.s-tag{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(14,165,233,.6);margin-bottom:14px;}
+h2{font-size:clamp(2rem,4vw,4rem);font-weight:800;letter-spacing:-1.5px;margin-bottom:14px;}
+h2 .ac{background:linear-gradient(135deg,var(--b1),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.s-sub{font-size:.88rem;font-weight:300;color:rgba(240,249,255,.4);line-height:1.8;max-width:400px;}
+
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:50px;}
+.plan-a{background:rgba(240,249,255,.04);border:1px solid rgba(14,165,233,.1);border-radius:24px;padding:32px;backdrop-filter:blur(16px);transition:all .3s;display:flex;flex-direction:column;}
+.plan-a:hover{transform:translateY(-6px);border-color:rgba(14,165,233,.25);box-shadow:0 20px 50px rgba(14,165,233,.08);}
+.plan-a.hot{border-color:rgba(52,211,153,.2);background:rgba(52,211,153,.04);}
+.pa-tag{font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(56,189,248,.6);margin-bottom:16px;}
+.plan-a.hot .pa-tag{color:rgba(52,211,153,.7);}
+.pa-name{font-size:1.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:6px;}
+.pa-period{font-size:.78rem;color:rgba(240,249,255,.35);margin-bottom:24px;}
+.pa-price{font-size:2.5rem;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,var(--b2),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px;}
+.pa-price-sub{font-size:.7rem;color:rgba(240,249,255,.3);margin-bottom:24px;}
+.pa-perks{list-style:none;flex:1;}
+.pa-perks li{font-size:.8rem;font-weight:300;color:rgba(240,249,255,.45);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:8px;}
+.pa-perks li::before{content:'→';color:rgba(14,165,233,.4);font-size:.7rem;}
+.pa-btn{display:block;text-align:center;margin-top:24px;padding:13px;border-radius:12px;font-size:.8rem;font-weight:700;text-decoration:none;transition:all .2s;}
+.plan-a:not(.hot) .pa-btn{border:1px solid rgba(14,165,233,.2);color:var(--b2);background:rgba(14,165,233,.05);}
+.plan-a:not(.hot) .pa-btn:hover{background:rgba(14,165,233,.12);border-color:var(--b2);}
+.plan-a.hot .pa-btn{background:linear-gradient(135deg,var(--b1),var(--mint));color:var(--bg);box-shadow:0 4px 18px rgba(14,165,233,.25);}
+.plan-a.hot .pa-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(14,165,233,.4);}
+/* DarkHub row */
+.dh-row{margin-top:14px;background:rgba(240,249,255,.03);border:1px solid rgba(56,189,248,.12);border-radius:24px;padding:36px;backdrop-filter:blur(16px);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.dhr-left .pa-tag{color:rgba(125,211,252,.6);}
+.dh-row-price{font-size:3.5rem;font-weight:800;background:linear-gradient(135deg,var(--b3),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.dh-row-sub{font-size:.68rem;color:rgba(240,249,255,.25);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+.dh-row-btn{display:block;padding:14px 32px;border-radius:14px;background:linear-gradient(135deg,var(--b1),var(--b3));color:var(--bg);font-size:.82rem;font-weight:700;text-decoration:none;text-align:center;box-shadow:0 4px 20px rgba(56,189,248,.2);transition:all .2s;white-space:nowrap;}
+.dh-row-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(56,189,248,.35);}
+
+.testi-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:50px;}
+.tw-card{background:rgba(240,249,255,.04);border:1px solid rgba(14,165,233,.08);border-radius:20px;padding:26px;backdrop-filter:blur(12px);transition:all .3s;}
+.tw-card:hover{border-color:rgba(14,165,233,.2);transform:translateY(-4px);}
+.tw-stars{font-size:.72rem;letter-spacing:3px;background:linear-gradient(135deg,var(--b2),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;}
+.tw-text{font-size:.85rem;font-weight:300;color:rgba(240,249,255,.5);line-height:1.7;margin-bottom:16px;font-style:italic;}
+.tw-name{font-size:.8rem;font-weight:700;}
+.tw-handle{font-size:.68rem;color:rgba(240,249,255,.3);}
+
+.cta-a{padding:100px 5vw;text-align:center;position:relative;z-index:1;}
+.cta-a-inner{max-width:700px;margin:0 auto;background:rgba(14,165,233,.05);border:1px solid rgba(14,165,233,.12);border-radius:36px;padding:72px 48px;backdrop-filter:blur(20px);}
+.cta-a h2{font-size:clamp(2.5rem,5vw,5rem);font-weight:800;letter-spacing:-2px;margin-bottom:16px;line-height:.95;}
+.cta-a p{font-size:.9rem;font-weight:300;color:rgba(240,249,255,.4);line-height:1.8;max-width:360px;margin:0 auto 36px;}
+
+footer{position:relative;z-index:1;border-top:1px solid rgba(14,165,233,.08);padding:28px 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.fl-a{font-weight:800;background:linear-gradient(135deg,var(--b2),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;font-size:1.1rem;}
+footer p{font-size:.68rem;color:rgba(240,249,255,.2);}
+
+@keyframes slideR{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:none;}}
+@keyframes slideL{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:none;}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:none;}
+@media(max-width:900px){.hero{grid-template-columns:1fr;}.plans-grid{grid-template-columns:1fr 1fr;}.dh-row{grid-template-columns:1fr;}.testi-wrap{grid-template-columns:1fr;}}
+@media(max-width:600px){.plans-grid{grid-template-columns:1fr;}.hc-stat-grid{grid-template-columns:1fr 1fr;}}
+</style></head><body>
+<div class="bg-wrap"><div class="aurora"><div class="aurora-band ab1"></div><div class="aurora-band ab2"></div></div></div>
+<div id="sp"></div>
+<nav><a class="logo" href="#">TonyShop</a><a class="nav-cta" href="#planes">Acceso VIP</a></nav>
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge"><div class="hb-dot"></div>Vendedor #1 en Telegram México</div>
+    <h1><span class="w">TONY</span><br><span class="b">SHOP</span><br><span class="m">VIP</span></h1>
+    <p class="hero-desc">El acceso más exclusivo de Telegram. Contenido premium de toda la República Mexicana con garantía total de Tony.</p>
+    <div class="hero-btns"><a class="btn-a btn-a1" href="#planes">Ver Planes VIP</a><a class="btn-a btn-a2" href="https://t.me/tonyshop" target="_blank">Contactar</a></div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hc-title">// TonyShop Stats</div>
+      <div class="hc-stat-grid"><div class="hcs"><div class="hcs-val">#1</div><div class="hcs-lab">Ranking MX</div></div><div class="hcs"><div class="hcs-val">100%</div><div class="hcs-lab">Confianza</div></div><div class="hcs"><div class="hcs-val">&lt;5m</div><div class="hcs-lab">Acceso</div></div><div class="hcs"><div class="hcs-val">3+ yr</div><div class="hcs-lab">Experiencia</div></div></div>
+      <div class="hc-divider"></div>
+      <div class="hc-feature"><div class="hc-check">✓</div>Pago directo, sin intermediarios</div>
+      <div class="hc-feature"><div class="hc-check">✓</div>Tony responde personalmente</div>
+      <div class="hc-feature"><div class="hc-check">✓</div>Acceso inmediato garantizado</div>
+      <div class="hc-feature"><div class="hc-check">✓</div>Contenido exclusivo diario</div>
+    </div>
+  </div>
+</section>
+
+<section id="planes"><div class="si">
+  <div class="reveal"><div class="s-tag">Elige tu acceso</div><h2>Planes <span class="ac">VIP</span></h2><p class="s-sub">Sin intermediarios. Sin esperas. Accede en minutos.</p></div>
+  <div class="plans-grid reveal">
+    <div class="plan-a"><div class="pa-tag">MX VIP</div><div class="pa-name">2 Semanas</div><div class="pa-period">Ideal para probar</div><div class="pa-price">$150</div><div class="pa-price-sub">MXN</div><ul class="pa-perks"><li>Acceso inmediato al grupo</li><li>Contenido exclusivo diario</li><li>Soporte con Tony</li></ul><a class="pa-btn" href="mxvip-2semanas.html">Elegir Plan →</a></div>
+    <div class="plan-a"><div class="pa-tag">MX VIP</div><div class="pa-name">1 Mes</div><div class="pa-period">El más popular</div><div class="pa-price">$250</div><div class="pa-price-sub">MXN</div><ul class="pa-perks"><li>Acceso inmediato al grupo</li><li>Contenido exclusivo diario</li><li>Soporte con Tony</li></ul><a class="pa-btn" href="mxvip-1mes.html">Elegir Plan →</a></div>
+    <div class="plan-a hot"><div class="pa-tag">MX VIP</div><div class="pa-name">4 Meses</div><div class="pa-period">Mejor valor</div><div class="pa-price">$400</div><div class="pa-price-sub">MXN</div><ul class="pa-perks"><li>Acceso inmediato al grupo</li><li>Contenido exclusivo diario</li><li>Soporte prioritario con Tony</li></ul><a class="pa-btn" href="mxvip-4meses.html">Elegir Plan →</a></div>
+  </div>
+  <div style="margin-top:14px;background:rgba(240,249,255,.03);border:1px solid rgba(14,165,233,.1);border-radius:24px;padding:28px;backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;" class="reveal">
+    <div><div class="pa-tag" style="color:rgba(125,211,252,.5);">MX VIP — PERMANENTE 👑</div><div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--b2),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Acceso de por vida</div><div style="font-size:.8rem;color:rgba(240,249,255,.35);margin-top:4px;">Pago único. Nunca más pagas.</div></div>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;"><div style="font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,var(--b2),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$1,000 MXN</div><a class="pa-btn" style="background:linear-gradient(135deg,var(--b1),var(--mint));color:var(--bg);padding:13px 28px;border-radius:12px;white-space:nowrap;" href="mxvip-permanente.html">Acceso Permanente →</a></div>
+  </div>
+  <div class="dh-row reveal">
+    <div class="dhr-left"><div class="pa-tag" style="color:rgba(125,211,252,.5);">🌑 DarkHub — Canal Exclusivo</div><div style="font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--b3),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">DarkHub</div><p style="font-size:.85rem;color:rgba(240,249,255,.4);line-height:1.7;max-width:400px;">El canal más exclusivo de TonyShop. Contenido diferente, experiencia única. Un solo pago, acceso de por vida.</p></div>
+    <div style="text-align:center;"><div class="dh-row-price">$200</div><div class="dh-row-sub">MXN · Pago único</div><a class="dh-row-btn" href="darkhub.html" style="display:block;margin-top:16px;">Entrar al DarkHub →</a></div>
+  </div>
+</div></section>
+
+<section><div class="si">
+  <div class="reveal"><div class="s-tag">Testimonios verificados</div><h2>Lo que dicen <span class="ac">nuestros usuarios</span></h2></div>
+  <div class="testi-wrap reveal">
+    <div class="tw-card"><div class="tw-stars">★★★★★</div><p class="tw-text">"Tony es de los pocos vendedores en los que realmente puedo confiar. Llevo 8 meses y jamás me ha fallado."</p><div class="tw-name">Rodrigo M.</div><div class="tw-handle">@rodrigo_vip</div></div>
+    <div class="tw-card"><div class="tw-stars">★★★★★</div><p class="tw-text">"Fui escéptico pero después del primer mes quedé 100% convencido. El número 1, sin discusión."</p><div class="tw-name">Karen L.</div><div class="tw-handle">@karen_elite</div></div>
+    <div class="tw-card"><div class="tw-stars">★★★★★</div><p class="tw-text">"Ningún servicio se compara. Responde rápido y cumple absolutamente todo lo que promete."</p><div class="tw-name">Diego V.</div><div class="tw-handle">@diegov_pro</div></div>
+  </div>
+</div></section>
+
+<section class="cta-a"><div class="cta-a-inner"><h2>¿Listo para el<br><span class="ac">nivel siguiente?</span></h2><p>Únete a los que ya disfrutan del mejor servicio VIP de Telegram en México.</p><a class="btn-a btn-a1" href="https://t.me/tonyshop" target="_blank">Hablar con Tony →</a></div></section>
+<footer><a class="fl-a" href="#">TonyShop</a><p>© 2024 TonyShop — Vendedor #1 en Telegram</p><p>@tonyshop</p></footer>
+<script>const sp=document.getElementById('sp');let tt=false;window.addEventListener('scroll',()=>{if(!tt){tt=true;requestAnimationFrame(()=>{sp.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';tt=false;});}},{passive:true});const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:.1});document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));</script>
+</body></html>
